@@ -5,8 +5,18 @@
         <title><%= @song.name %></title>
     </head>
     <body>
+        <!-- views/songs/show.erb -->
+
+        <% if flash.has?(:message) %>
+          <%= flash[:message] %>
+        <% end %>
+
         <h1>Song Name: <%= @song.name %></h1>
-        <h1>Artist: <a href="/artists/<%=@song.artist.slug %>"><%= @song.artist.name %></h1></a>
-        <h1>Genre: <a href="/genres/<%=@song.genres.first.slug %>"><%= @song.genres.first.name %></h1></a>
+        <% unless @song.artist.nil? %>
+            <h1>Artist: <a href="/artists/<%=@song.artist.slug %>"><%= @song.artist.name %></h1></a>
+        <% end %>
+        <% unless @song.genres.empty? %>
+            <h1>Genre: <a href="/genres/<%=@song.genres.first.slug %>"><%= @song.genres.first.name %></h1></a>
+        <% end %>
     </body>
 </html>
